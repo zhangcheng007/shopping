@@ -22,6 +22,5 @@ urlpatterns = [
     url(r'^customer/', include('customer.urls',namespace="customer")),
     url(r'^financial/',include('financial.urls',namespace="financial")),
     url(r'^sales/',include('sales.urls',namespace="sales")),
-
 ]
 
