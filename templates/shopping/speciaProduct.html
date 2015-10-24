@@ -1,0 +1,67 @@
+{% extends "shopping/shoppingIndex.html" %}
+
+{% load staticfiles %}
+
+{% block title %}Special product{% endblock %}
+
+
+{% block content %}
+
+   {% with category=categorys%}
+
+        {% if category.product_set.all %}
+                 <ui class="uk-grid uk-grid-small uk-grid-width-1-4"  data-uk-grid-margin>
+
+                    {% for product in category.product_set.all %}
+
+                         <li >
+
+                             <div class="uk-thumbnail uk-thumbnail-medium">
+                                 {% for pic in  product.productpic_set.all %}
+                                 <img src="{% static pic.url %}" alt="">
+                                 {% endfor %}
+                                 <div class="uk-thumbnail-caption"><a  href="{% url 'shopping:detail' product.id %}" >{{product.name}}</a></div>
+
+                                 <div class="uk-thumbnail-caption">${{product.price}}</div>
+                                 <div class="uk-thumbnail-caption">
+                                 <a href="" class="uk-button">ADD TO BASKET</a>
+                                 </div>
+
+                            </div>
+                        </li>
+
+                    {% endfor %}
+
+                 </ui>
+
+             {% else %}
+
+              <div class="uk-grid uk-grid-width-1-1">
+
+                <div >&nbsp;</div>
+                <div >&nbsp;</div>
+
+                <div> <h3>You have no relation product with the categary.</h3></div>
+
+                <div >&nbsp;</div>
+                <div >&nbsp;</div>
+                <div >&nbsp;</div>
+                <div >&nbsp;</div>
+                <div >&nbsp;</div>
+                <div >&nbsp;</div>
+
+
+
+
+
+              </div>
+
+
+
+
+
+
+        {% endif %}
+
+    {% endwith %}
+{% endblock %}

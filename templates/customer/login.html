@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆界面</title>
+</head>
+<body>
+
+<form role="form" action="/customer/check/" method="post">
+     {% csrf_token %}
+      <label>Username</label>
+      <input type="text" name='username'>
+
+      <label>Password</label>
+      <input name="password" type="password">
+
+      <input type="submit" value="Submit">
+
+</form>
+
+
+{{ success }}
+
+
+
+
+</body>
+</html>

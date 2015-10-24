@@ -1,0 +1,59 @@
+{% extends "shopping/shoppingIndex.html" %}
+
+{% load staticfiles %}
+
+{% block title %} product detail {% endblock %}
+
+
+{% block content %}
+
+      <div class="uk-grid uk-grid-width-small-1-2" data-uk-grid-margin>
+
+        <div>
+             {% for pic in  product.productpic_set.all %}
+             <img src="{% static pic.url %}" alt="">  {% endfor %}
+        </div>
+
+        <div>
+
+
+            <table  class="uk-table ">
+            <tr><td></td></tr>
+            <tr><td></td></tr>
+            <tr><td><h2>{{ product.name }}</h2></td></tr>
+            <form action="{% url 'sales:sales_add_to_cart' %}" method="post">
+                 {% csrf_token %}
+                <input name="product_id" type="hidden" value="{{product.id}}"/>
+             <tr><td class="uk-text-large">${{ product.price }}</td></tr>
+
+             <tr><td>In stock ({{  quantity }} available)</td></tr>
+             <tr><td>product code:2015MN</td></tr>
+             <tr><td></td></tr>
+             <tr class="uk-text-large"><td>Quantity:<input class="uk-form-width-small" name="quantity" type="text" value="1"/> </td></tr>
+             <tr><td></td></tr>
+             <tr><td><button class="uk-button  uk-button-danger"> ADD TO BASKET </button></td>
+             </tr>
+            </form>
+             </table>
+
+        </div>
+
+
+     </div>
+
+
+       <div class="uk-grid uk-grid-width-small-1-1" data-uk-grid-margin>
+
+         <div>
+             <h2>Product Description</h2>
+             <p>
+              <h3>
+              {{ product.description }}
+              </h3>
+             </p>
+         </div>
+     </div>
+
+
+
+{% endblock %}

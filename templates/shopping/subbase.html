@@ -1,0 +1,14 @@
+{% extends "shopping/base.html" %}
+
+
+
+{% block title %} booklist {% endblock %}
+
+
+{% block content %}
+
+{% for item in staffs %}
+<p>{{ item.id }},{{ item.name }}</p>
+{% endfor %}
+
+{% endblock %}

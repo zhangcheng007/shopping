@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome to pen shopping{% endblock %}</title>
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'common/css/uikit.min.css'%}"/>
+<script type="text/javascript" src="{% static 'common/js/jquery.min.js'%}"></script>
+<script type="text/javascript" src="{% static 'common/js/uikit.min.js'%}"></script>
+<script type="text/javascript" src="{% static 'common/js/components/parallax.js'%}"></script>
+</head>
+<body>
+
+   <nav class="uk-navbar uk-navbar-attached" style="background-color: black;">
+        <div class="uk-container uk-container-center" >
+            <a href="/shopping" class="uk-navbar-brand" style="font-style:italic;color:snow">The Shop of Pen</a>
+            <div class="uk-grid uk-navbar-flip">
+
+                <ui class="uk-grid uk-margin-top">
+
+                    <li><a href="#" style="color:snow"><i class="uk-icon-envelope-o"></i> Contact us</a></li>
+                    <li><a href="#" style="color:snow"><i class="uk-icon-meh-o"></i> Create an account</a></li>
+
+                     <li class="uk-parent" data-uk-dropdown>
+                        <a href="#0" style="color:snow"><i class="uk-icon-user"></i> Sign in</a>
+                        <div class="uk-dropdown uk-dropdown-navbar">
+                            <ul class="uk-nav uk-nav-navbar">
+                                <li><a href="/" ><i class="uk-icon-sign-out"></i>sign out</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                </ui>
+
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="uk-container uk-container-center uk-margin-top">
+
+        <div class=" uk-grid uk-grid-width-small-1-3" >
+            <div class="uk-text-large"><i class="uk-icon-home uk-icon-medium"></i>Browse Store </div>
+
+             <div class="uk-text-large"> <form class="uk-form">
+                    <input type="text" placeholder="Search">
+                    <button class="uk-button ">GO</button>
+                    </form>
+             </div>
+
+
+             <div class="uk-button-group uk-text-right">
+                <a  href=""   class="uk-button uk-button-danger">View Basket</a>
+                <div data-uk-dropdown="{mode:'click'}">
+                    <a class="uk-button uk-button-danger"><i class="uk-icon-caret-down"></i></a>
+
+               </div>
+
+             </div>
+
+    </div>
+
+       <div class="uk-grid uk-width-1-1 uk-margin-top">
+
+                <div class="uk-width-2-10 ">
+
+                    <ui class="uk-nav uk-nav-side uk-panel uk-panel-box" >
+                        <li > <a  href="{% url 'shopping:index' %}">All product</a></li>
+
+                        {% for category in latest_category_list %}
+                        <li> <a href="{% url 'shopping:categoryToProduct' category.id %}">{{category.name}}</a></li>
+                        {% endfor %}
+
+                    </ui>
+
+                   <ui>
+
+                        <li class="uk-margin-top">
+
+
+                        </li>
+
+
+                   </ui>
+
+                       <ui>
+
+                        <li class="uk-margin-top">
+
+
+
+                        </li>
+
+
+                   </ui>
+
+
+                </div>
+
+                <div class=" uk-width-8-10">
+
+                <!-- content -->
+                {% block content %}
+
+                    <ui class="uk-grid uk-grid-small uk-grid-width-1-4"  data-uk-grid-margin>
+
+                    {% for category in latest_category_list %}
+                    {% for product in category.product_set.all %}
+
+                     <li >
+
+                     <div class="uk-thumbnail uk-thumbnail-medium">
+                         {% for pic in  product.productpic_set.all %}
+                         <a  href="{% url 'shopping:detail' product.id %}" ><img src="{% static pic.url %}" alt=""> </a>
+                         {% endfor %}
+                     <div class="uk-thumbnail-caption"><a  href="{% url 'shopping:detail' product.id %}" >{{product.name}}</a></div>
+
+                     <div class="uk-thumbnail-caption">${{product.price}}</div>
+                     <div class="uk-thumbnail-caption">
+                     <a href="" class="uk-button ">ADD TO BASKET</a>
+                     </div>
+
+                    </div>
+                    </li>
+
+                    {% endfor %}
+                    {% endfor %}
+                    </ui>
+
+                {% endblock %}
+                <!-- // content -->
+
+                </div>
+
+               </div>
+        </div>
+
+
+    <div class="uk-block uk-block-secondary uk-margin-top">
+
+        <div class="uk-grid uk-container uk-container-center">
+
+            <div class="uk-grid uk-grid-width-large-1-2">
+
+                <div >
+                <p> <a style="color: #f7f7f7">Terms and conditions |  Contact us </a></br>
+                <i style="color: white">Designed and built by zhang cheng.Hosted by Sinonet,Zhongguancun Environmental Science and Technology Park,
+                Building5,No.7, Dijin Road Haidian District, Beijing.
+                </i>
+                </p>
+                </div>
+
+                <div> <p> : <i class="uk-icon-truck uk-icon-medium" style="color: whitesmoke;"></i>
+
+                          : <i class="uk-icon-car uk-icon-medium" style="color: whitesmoke;"></i>
+                          : <i class="uk-icon-bus uk-icon-medium" style="color: whitesmoke;"></i>
+                     </p>
+                </div>
+
+
+           </div>
+
+        </div>
+
+
+    </div>
+
+
+
+</body>
+</html>

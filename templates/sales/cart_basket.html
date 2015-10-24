@@ -1,0 +1,81 @@
+{% extends "shopping/shoppingIndex.html" %}
+{% load staticfiles %}
+
+
+{% block title %} basket detail {% endblock %}
+
+
+{% block content %}
+
+
+
+<div class="uk-grid  uk-grid-width-small-1-1" >
+
+
+  <div class="uk-margin-top uk-margin-bottom" >
+   <h2 >Basket</h2>
+  </div>
+
+ {% with items=cart.get_items  sub_total=cart.get_sub_total  items_count=cart.get_items_count%}
+
+  <div >
+    <ui class="uk-grid uk-grid-small uk-grid-width-1-3"  data-uk-grid-margin>
+
+
+        {% if items %}
+            <li ><h3>Items to buy now</h3></li>
+            <li><h3>Quantity</h3></li>
+            <li><h3>Price</h3></li>
+
+          {% for item in items %}
+                {% with product=item.product %}
+            <li ><h3>{{  product.name }}</h3></li>
+            <li><h3>{{ item.quantity }}</h3></li>
+            <li><h3>${{ product.price}}</h3></li>
+                 {% endwith %}
+
+           {% endfor %}
+
+        {% else %}
+
+         <h4 class="uk-margin-large">You have no items in your shopping cart.
+         </h4>
+
+
+       {% endif %}
+
+    </ui>
+
+  </div>
+
+
+     <hr class="uk-grid-divider">
+
+
+    <div>
+
+
+        <ui class="uk-grid uk-grid-small uk-grid-width-1-3">
+        <li ><h2>Subtotal</h2>
+            <p style="color: #d32c46">Before Flat Rate Shipping ($4.95) & Taxes (Canada-only)</p>
+        </li>
+        <li><h3>{{ items_count }} </h3>   </li>
+        <li><h3>{{ sub_total }} </h3></li>
+        </ui>
+
+
+
+    </div>
+{% endwith %}
+
+
+    <div class="uk-text-right">   <button class="uk-button  uk-button-primary uk-button-large">PROCEED TO CHECKEOUT </button>     </div>
+
+
+
+
+
+</div>
+
+
+{% endblock %}
