@@ -20,7 +20,6 @@ class Cart(models.Model):
             sub_total += item.get_sub_total()
 
         return sub_total
-
     def get_taxes(self):
         """
         Total taxes applied on cart items
