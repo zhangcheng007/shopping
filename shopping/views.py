@@ -16,6 +16,7 @@ def staff(request):
     #return render(request, 'testTemp.html', context)
     return render(request, 'testTemp.html', {'staffs': staff_list})
 
+
 # 获取商品类型和商品
 def index(request):
 
